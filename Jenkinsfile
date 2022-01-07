@@ -3,22 +3,26 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                echo "Building the project...."  
+                echo "Building the code...."  
+                bat "mvn clean"
+            }
+        }
+          stage('Compile') { 
+            steps {
+                echo "Testing the code...." 
+                bat "mvn clean compile"
             }
         }
         stage('Test') { 
             steps {
-                echo "Testing the project...." 
+                echo "Testing the code...." 
+                bat "mvn clean test"
             }
         }
-        stage('Deploy') { 
+        stage('Package') { 
             steps {
                 echo "Deploying the project...." 
-            }
-        }
-        stage('Release') { 
-            steps {
-                echo "Releasing the project...." 
+                bat "mvn clean package"
             }
         }
     }
